@@ -1,6 +1,6 @@
-import type { BuiltInPageContext } from '../../node/types'
+import type { PageContextBuiltIn } from '../../node/types'
 
-export type PageContextBuiltInClient = Partial<BuiltInPageContext> &
-  Pick<BuiltInPageContext, 'Page' | 'pageExports' | 'url' | 'urlPathname' | 'urlParsed'> & {
+export type PageContextBuiltInClient = Partial<PageContextBuiltIn> &
+  Pick<PageContextBuiltIn, 'Page' | 'pageExports' | 'url' | 'urlPathname' | 'urlParsed'> & {
     isHydration: boolean
   }

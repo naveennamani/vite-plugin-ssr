@@ -3,14 +3,14 @@ import { escapeInject } from 'vite-plugin-ssr'
 import { createApp } from './app'
 import { getPageTitle } from './getPageTitle'
 import type { PageContext } from './types'
-import type { GetPageContext } from 'vite-plugin-ssr'
+import type { PageContextBuiltIn } from 'vite-plugin-ssr'
 
 export { passToClient }
 export { render }
 
 const passToClient = ['pageProps', 'documentProps']
 
-async function render(pageContext: GetPageContext<PageContext>) {
+async function render(pageContext: PageContextBuiltIn & PageContext) {
   const app = createApp(pageContext)
   const stream = renderToNodeStream(app)
 

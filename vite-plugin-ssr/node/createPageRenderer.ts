@@ -5,6 +5,7 @@ import { assert, assertUsage } from '../shared/utils/assert'
 import { resolve } from 'path'
 import { importBuildWasCalled } from './importBuild'
 import type { ViteDevServer } from 'vite'
+import { OnBeforeRenderBuiltIn, VitePluginSsr } from './types'
 
 export { createPageRenderer }
 export { createPageRendererWasCalled }
@@ -15,7 +16,7 @@ function createPageRendererWasCalled() {
   return wasCalled
 }
 
-function createPageRenderer<T extends {} = {}>({
+function createPageRenderer({
   viteDevServer,
   root,
   outDir = 'dist',
@@ -30,7 +31,7 @@ function createPageRenderer<T extends {} = {}>({
   outDir?: string
   isProduction?: boolean
   base?: string
-}): RenderPage<T> {
+}): RenderPage<OnBeforeRenderBuiltIn, VitePluginSsr.OnBeforeRender> {
   assertUsage(
     !wasCalled,
     'You are trying to call `createPageRenderer()` a second time, but it should be called only once.',
@@ -41,7 +42,7 @@ function createPageRenderer<T extends {} = {}>({
   assertArguments(ssrEnv, Array.from(arguments))
   setSsrEnv(ssrEnv)
 
-  return renderPageWithoutThrowing as RenderPage<T>
+  return renderPageWithoutThrowing as RenderPage<OnBeforeRenderBuiltIn, VitePluginSsr.OnBeforeRender>
 }
 
 function assertArguments(

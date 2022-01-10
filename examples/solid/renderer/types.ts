@@ -1,11 +1,11 @@
 import { Component } from 'solid-js'
-import type { GetPageContext } from 'vite-plugin-ssr'
+import type { PageContextBuiltIn } from 'vite-plugin-ssr'
 export type PageProps = {}
-export type PageContext = GetPageContext<{
+export type PageContext = PageContextBuiltIn & {
   Page: (pageProps: PageProps) => Component
   pageProps: PageProps
   documentProps?: {
     title?: string
     description?: string
   }
-}>
+}

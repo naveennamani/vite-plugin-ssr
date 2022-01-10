@@ -4,14 +4,14 @@ import { escapeInject } from 'vite-plugin-ssr'
 import { PageShell } from './PageShell'
 import { getPageTitle } from './getPageTitle'
 import type { PageContext } from './types'
-import type { GetPageContext } from 'vite-plugin-ssr'
+import type { PageContextBuiltIn } from 'vite-plugin-ssr'
 
 export { render }
 export { passToClient }
 
 const passToClient = ['pageProps', 'documentProps']
 
-function render(pageContext: GetPageContext<PageContext>) {
+function render(pageContext: PageContextBuiltIn & PageContext) {
   const { Page, pageProps } = pageContext
   const stream = ReactDOMServer.renderToNodeStream(
     <PageShell pageContext={pageContext}>
